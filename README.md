@@ -8,11 +8,11 @@ Data is stored in a file in Json format.
 
 # Batch Analysis
 The following five different metrics are implemented:
-\item Average friend count
-\item Maximum friend count
-\item Minimum friend count
-\item User with the most followers per hashtag
-\item User with the highest popularity per hashtag
+* Average friend count
+* Maximum friend count
+* Minimum friend count
+* User with the most followers per hashtag
+* User with the highest popularity per hashtag
 
 The analysis is implemented in TwitterBatch.java.
 
