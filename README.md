@@ -1,6 +1,6 @@
 # twitterBigData
 Big Data Project using flink based on twitter data.
-To run this you need an API Key for twitter. The Analysis is based on five hashtags: bigdata,machinelearning,deeplearning,huawei,trump.
+To run this you need an API Key for twitter. The Analysis is based on five hashtags: bigdata, machinelearning, deeplearning, huawei, trump.
 
 # Data Collection
 Data Collection is implemented in TwitterStreamToFile.java.
