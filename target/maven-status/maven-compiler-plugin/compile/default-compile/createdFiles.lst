@@ -1,0 +1,9 @@
+hhu/bigdata/BatchJob.class
+hhu/bigdata/WordCount$LineSplitter.class
+hhu/bigdata/SocketTextStreamWordCount$LineSplitter.class
+hhu/bigdata/WordCount.class
+utils/NetworkSocketText.class
+utils/DataUtils.class
+hhu/bigdata/SocketTextStreamWordCount.class
+hhu/bigdata/TwitterStreamFile.class
+hhu/bigdata/StreamingJob.class
