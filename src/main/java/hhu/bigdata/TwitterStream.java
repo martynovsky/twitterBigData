@@ -54,7 +54,8 @@ public class TwitterStream {
                 .keyBy(0)
                 .countWindow(5)
                 //get the user with the highest follower count per hashtag
-                .maxBy(2);
+                .maxBy(2)
+                .map(new FollowerCountToString());
 
         DataStream mostPopularUserPerHashtag = streamSource
                 //sum follower and friend count to get popularity
@@ -65,16 +66,15 @@ public class TwitterStream {
                 //now return the tweet whose user has the highest popularity
                 .maxBy(2);
 
-        //now call compare and predict functions
+        //now call compare and predict functions and normal output functions
 
         maxFriends.addSink(new CompareMax());
         minFriends.addSink(new CompareMin());
         avgFriends.addSink(new CompareAvg());
         mostPopularUserPerHashtag.addSink(new PredictPopularity());
         //avgFriends.print();
-        //topFollowerPerHashtag.print();
+        topFollowerPerHashtag.print();
         //mostPopularUserPerHashtag.print();
-        //streamSource.writeAsText("/home/yulian/Downloads/blockkurs/reddit/src/main/resources/test_data");
         env.execute("Twitter Streaming Example");
     }
 }
