@@ -14,11 +14,13 @@ public class PredictPopularity extends RichSinkFunction<Tuple3<String,String,Int
 
     private double runningAvg = 0;
 
+    //Initialize Value by taking the average of the batch data
     @Override
     public void open(Configuration parameters) throws Exception {
         this.runningAvg = readPopularityAvg();
     }
 
+    //Build a running average and print the prediction and the actual value to console
     @Override
     public void invoke(Tuple3<String,String,Integer> t, Context context) throws Exception{
         System.out.println("Predicted Popularity for hashtag " + t.f0 + ": " + this.runningAvg + ", Actual Popularity: " + t.f2);
