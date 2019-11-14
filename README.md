@@ -18,16 +18,16 @@ The analysis is implemented in TwitterBatch.java.
 
 # Stream Analysis
 
-The metrics are the same as in Batch Analysis but are perfomed on count windows.
+The metrics are the same as in Batch Analysis but are perfomed on count windows (for the purpose of demonstration these are set to low values).
 This is implemented in TwitterStream.java.
 
-For the comparison with the batch analysis the metrics Average, Minimum and Maximum friend count are considered.
+For the comparison with the batch analysis all 5 metrics are considered.
 This is also done in TwitterStream.java. 
-If you don't want to compare but just to print out the value 
-you can change the function call to match the call for topFollowerPerHashtag.
 
 For the prediction the metric mostPopularUserPerHashtag is used. The prediction is done using
 a running Average over all hashtags. The value is initialized on the stored batch analysis.
-As with the comparison the call can be changed to just print the actual value of the metric.
+
+If you only want comparisons or predictions you can comment the associated function calls.
+If you only want to see the output of the streams without comparison or prediction you can replace the comparison and predicion calls with ".print()".
 
 The Outputs are console based.
