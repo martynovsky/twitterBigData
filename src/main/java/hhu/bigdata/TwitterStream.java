@@ -34,7 +34,7 @@ public class TwitterStream {
         DataStream maxFriends = streamSource
                 //get the friend count for each tweet
                 .map(new FilterFriendsCount())
-                .countWindowAll(10)
+                .countWindowAll(3)
                 //get the maximum friend count in the last 10 tweets
                 .reduce(new maxCount())
                 .map(new IntegerToDouble());
@@ -54,8 +54,7 @@ public class TwitterStream {
                 .keyBy(0)
                 .countWindow(5)
                 //get the user with the highest follower count per hashtag
-                .maxBy(2)
-                .map(new FollowerCountToString());
+                .maxBy(2);
 
         DataStream mostPopularUserPerHashtag = streamSource
                 //sum follower and friend count to get popularity
@@ -68,13 +67,20 @@ public class TwitterStream {
 
         //now call compare and predict functions and normal output functions
 
-        maxFriends.addSink(new CompareMax());
-        minFriends.addSink(new CompareMin());
-        avgFriends.addSink(new CompareAvg());
-        mostPopularUserPerHashtag.addSink(new PredictPopularity());
-        //avgFriends.print();
-        topFollowerPerHashtag.print();
-        //mostPopularUserPerHashtag.print();
+        //predict functions
+        //set parallelism to 1 so that the prediction is global and not just per parllel stream
+        //maxFriends.addSink(new PredictMax()).setParallelism(1);
+        //avgFriends.addSink(new PredictAvg()).setParallelism(1);
+        //mostPopularUserPerHashtag.addSink(new PredictPopularity()).setParallelism(1);
+
+        //compare functions
+        //maxFriends.addSink(new CompareMax());
+        //minFriends.addSink(new CompareMin());
+        //avgFriends.addSink(new CompareAvg());
+        //mostPopularUserPerHashtag.addSink(new ComparePopularUser()).setParallelism(1);
+        topFollowerPerHashtag.addSink(new CompareTopFollower()).setParallelism(1);
+
+        //topFollowerPerHashtag.print();
         env.execute("Twitter Streaming Example");
     }
 }

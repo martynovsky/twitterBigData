@@ -18,7 +18,7 @@ public class CompareAvg extends RichSinkFunction<Double> {
 
     @Override
     public void open(Configuration parameters) throws Exception{
-        this.avg = readAvg();
+        this.avg = readValue("avg");
     }
 
 
@@ -37,8 +37,8 @@ public class CompareAvg extends RichSinkFunction<Double> {
 
 
 
-    private static Double readAvg() {
-        String path = "src/main/resources/avg";
+    static Double readValue(String file) {
+        String path = "src/main/resources/" + file;
         String line = null;
         try {
             // FileReader reads text files in the default encoding.

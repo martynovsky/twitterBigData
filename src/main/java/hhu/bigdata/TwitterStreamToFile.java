@@ -38,7 +38,10 @@ public class TwitterStreamToFile {
     public static TwitterSource createSource(ArrayList hashtags){
         Properties props = new Properties();
         //set twitter keys here
-
+        props.setProperty(TwitterSource.CONSUMER_KEY, "jLzChYSOBtBxXND4PSPJtBxMd");
+        props.setProperty(TwitterSource.CONSUMER_SECRET, "KHPFbhKdsGYuw0mmShOeLf4sdr7DkaaYYlXD8Dm6zLI5T9QgaO");
+        props.setProperty(TwitterSource.TOKEN, "2830788634-WYxWK6wuKVqb2WjlpjzT6UAQuMyBj0duy8LytwZ");
+        props.setProperty(TwitterSource.TOKEN_SECRET, "HTHTOQobmbQxh7Stsk1KcTdEdDzzyJutmN7NhtbcJRXP7");
 
         HashTagEndPoint customInitializer = new HashTagEndPoint(hashtags);
         TwitterSource source = new TwitterSource(props);
