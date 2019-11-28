@@ -29,7 +29,7 @@ public class TwitterBatch {
                 .groupBy(0)
                 .first(1)
                 //sum friend count and the last entry which is always a 1
-                .reduce(new sumInt())
+                .reduce(new SumInt())
                 //divide friend count sum by sum of users
                 .map(new FriendsCountAverage())
                 //wrap in an object for writing to file
@@ -39,7 +39,7 @@ public class TwitterBatch {
                 //get friend count for each tweet
                 .map(new FilterFriendsCount())
                 //find maximum friend count
-                .reduce(new maxCount())
+                .reduce(new MaxCount())
                 //cast to double
                 .map(new IntegerToDouble())
                 //wrap in an object for writing to file
@@ -49,7 +49,7 @@ public class TwitterBatch {
                 //get friend count for each tweet
                 .map(new FilterFriendsCount())
                 //find minimum friend count
-                .reduce(new minCount())
+                .reduce(new MinCount())
                 //cast to double
                 .map(new IntegerToDouble())
                 //wrap in an object for writing to file

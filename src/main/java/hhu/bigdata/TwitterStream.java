@@ -27,7 +27,7 @@ public class TwitterStream {
                 .map(new FilterFriendsCountToTuple())
                 .countWindowAll(3)
                 //sum the friend count and the last element which is always a 1
-                .reduce(new sumInt())
+                .reduce(new SumInt())
                 //divide sum of friend counts by the sum of tweets
                 .map(new FriendsCountAverage());
 
@@ -36,7 +36,7 @@ public class TwitterStream {
                 .map(new FilterFriendsCount())
                 .countWindowAll(3)
                 //get the maximum friend count in the last 10 tweets
-                .reduce(new maxCount())
+                .reduce(new MaxCount())
                 .map(new IntegerToDouble());
 
         DataStream minFriends = streamSource
@@ -44,7 +44,7 @@ public class TwitterStream {
                 .map(new FilterFriendsCount())
                 .countWindowAll(2)
                 //get the minimum friend count in the last 10 tweets
-                .reduce(new minCount())
+                .reduce(new MinCount())
                 .map(new IntegerToDouble());
 
         DataStream topFollowerPerHashtag = streamSource
@@ -69,16 +69,16 @@ public class TwitterStream {
 
         //predict functions
         //set parallelism to 1 so that the prediction is global and not just per parllel stream
-        //maxFriends.addSink(new PredictMax()).setParallelism(1);
-        //avgFriends.addSink(new PredictAvg()).setParallelism(1);
-        //mostPopularUserPerHashtag.addSink(new PredictPopularity()).setParallelism(1);
+        maxFriends.addSink(new PredictMax()).setParallelism(1);
+        avgFriends.addSink(new PredictAvg()).setParallelism(1);
+        mostPopularUserPerHashtag.addSink(new PredictPopularity()).setParallelism(1);
 
         //compare functions
         //maxFriends.addSink(new CompareMax());
         //minFriends.addSink(new CompareMin());
         //avgFriends.addSink(new CompareAvg());
         //mostPopularUserPerHashtag.addSink(new ComparePopularUser()).setParallelism(1);
-        topFollowerPerHashtag.addSink(new CompareTopFollower()).setParallelism(1);
+        //topFollowerPerHashtag.addSink(new CompareTopFollower()).setParallelism(1);
 
         //topFollowerPerHashtag.print();
         env.execute("Twitter Streaming Example");
