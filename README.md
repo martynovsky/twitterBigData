@@ -2,6 +2,13 @@
 Big Data Project using flink based on twitter data.
 To run this you need an API Key for twitter. The Analysis is based on five hashtags: bigdata, machinelearning, deeplearning, huawei, trump.
 
+# Setup
+Clone the project with git clone https://github.com/martynovsky/twitterBigData.git
+Import the project to InteliJ and let it install then dependencies.
+Then you can use it as described in the next sections by running the associated main() function.
+
+
+
 # Data Collection
 Data Collection is implemented in TwitterStreamToFile.java.
 Data is stored in a file in Json format.
